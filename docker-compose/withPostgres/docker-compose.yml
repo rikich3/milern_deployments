@@ -3,6 +3,7 @@ version: '3.8'
 volumes:
   db_storage:
   n8n_storage:
+  evolution_instances:
 
 services:
   postgres:
@@ -54,3 +55,23 @@ services:
       - N8N_RUNNERS_TASK_BROKER_URI=http://n8n:5679
     depends_on:
       - n8n
+      
+  evolution-api:
+    image: atendai/evolution-api:v2
+    restart: always
+    environment:
+      - DB_PROVIDER=postgresql
+      - DB_URL=postgresql://${POSTGRES_NON_ROOT_USER}:${POSTGRES_NON_ROOT_PASSWORD}@postgres:5432/evolution_api
+      - DATABASE_PROVIDER=postgresql
+      - DATABASE_CONNECTION_URI=postgresql://${POSTGRES_NON_ROOT_USER}:${POSTGRES_NON_ROOT_PASSWORD}@postgres:5432/evolution_api
+      - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY:-evolution}
+      - SERVER_URL=http://localhost:8080
+      - REDIS_ENABLED=false
+    ports:
+      - "8080:8080"
+    volumes:
+      - evolution_instances:/evolution/instances
+    depends_on:
+      postgres:
+        condition: service_healthy
+
