@@ -57,7 +57,7 @@ services:
       - n8n
       
   evolution-api:
-    image: atendai/evolution-api:2.3.7
+    image: evoapicloud/evolution-api:v2.3.7
     restart: always
     environment:
       - DB_PROVIDER=postgresql
