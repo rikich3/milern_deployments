@@ -84,7 +84,7 @@ services:
       - DATABASE_PROVIDER=postgresql
       - DATABASE_CONNECTION_URI=postgresql://${POSTGRES_NON_ROOT_USER}:${POSTGRES_NON_ROOT_PASSWORD}@postgres:5432/evolution_api
       - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY:-evolution}
-      - SERVER_URL=http://localhost:8080
+      - SERVER_URL=https://evoapi.frennow.app
       - REDIS_ENABLED=true
       - REDIS_URI=redis://:${REDIS_PASSWORD}@redis:6379
     ports:
