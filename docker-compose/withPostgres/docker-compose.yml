@@ -86,7 +86,9 @@ services:
       - AUTHENTICATION_API_KEY=${EVOLUTION_API_KEY:-evolution}
       - SERVER_URL=https://evoapi.frennow.app
       - REDIS_ENABLED=true
-      - REDIS_URI=redis://:${REDIS_PASSWORD}@redis:6379
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
     ports:
       - "8080:8080"
     volumes:
